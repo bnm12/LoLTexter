@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
 
-namespace LoL_Texter
+namespace LoL_Texter.Classes
 {
 	public static class PathFinder
 	{
@@ -34,7 +34,7 @@ namespace LoL_Texter
 			FontConfigFolder = latestVersion + @"\Data\Menu";
 
 			string file = Directory.GetFiles(FontConfigFolder)[0];
-			FullPath = FontConfigFolder + @"\" + file;
+			FullPath = file;
 		}
 	}
 }
