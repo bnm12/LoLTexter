@@ -23,9 +23,10 @@ namespace LoL_Texter.Classes
 			// Parse Config file to get the locale
 			string[] lines = File.ReadAllLines(RADSPath + @"\system\locale.cfg");
 			string[] lineParts = lines[0].Split('=');
-			Locale = lineParts[1].Trim();
+			string[] lineparts = lineParts[1].Trim().Split('_');
+			Locale = lineparts[0].ToLower() + "_" + lineparts[1].ToUpper();
 
-			ProjectFolder = "lol_game_client_" + Locale;
+			ProjectFolder = "lol_game_client_" + Locale.ToLower();
 
 			// Build the string to the latest release folder
 			string pathToLatest = RADSPath + @"\projects\" + ProjectFolder;
