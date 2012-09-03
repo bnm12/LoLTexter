@@ -50,15 +50,13 @@ namespace LoL_Texter.Classes
 
 		public bool SaveLines(string [] lines)
 		{
+			if (!File.Exists(_defaultPath + @"\backup.loltxt"))
+			{
+				DoBackup();
+			}
+
 			File.WriteAllLines(_defaultPath + @"\fontconfig_" + _defaultLocale + ".txt", lines);
-			if(File.ReadAllLines(_defaultPath + @"\fontconfig_" + _defaultLocale + ".txt").Equals(lines))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return File.ReadAllLines(_defaultPath + @"\fontconfig_" + _defaultLocale + ".txt").Equals(lines);
 		}
 	}
 }
