@@ -3,32 +3,35 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.Win32;
 
-namespace LoL_Text_modder
+namespace LoL_Texter
 {
 	public static class PathFinder
 	{
-		public static string RADSpath;
+		public static string RADSPath;
 		public static string Locale;
+		public static string ProjectFolder;
+		public static string FullPath;
 
 		static PathFinder()
 		{
+			// Find install directory
 			var openSubKey = Registry.CurrentUser.OpenSubKey(@"Software\Riot Games\RADS");
 			if (openSubKey != null)
-				RADSpath = openSubKey.GetValue("LocalRootFolder").ToString();
-		}
+				RADSPath = openSubKey.GetValue("LocalRootFolder").ToString();
 
-		public static string GetLocale()
-		{
-			string[] lines = File.ReadAllLines(RADSpath + @"\system\locale.cfg");
+			// Parse Config file to get the locale
+			string[] lines = File.ReadAllLines(RADSPath + @"\system\locale.cfg");
 			string[] lineParts = lines[0].Split('=');
 			Locale = lineParts[1].Trim();
 
-			return Locale;
-		}
+			ProjectFolder = "lol_game_client_" + Locale;
 
-		public static string GetLatestFilePath(string locale)
-		{
-			return "";
+			// Build the string to the latest release folder
+			string pathToLatest = RADSPath + @"\projects\" + ProjectFolder;
+			string[] dirs = Directory.GetDirectories(pathToLatest + @"\managedfiles");
+			string latestVersion = dirs[dirs.Length - 1];
+			FullPath = latestVersion + @"\Data\Menu";
 		}
 	}
 }
+
