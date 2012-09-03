@@ -44,7 +44,7 @@ namespace LoL_Texter
 					foreach (var path in data)
 					{
 						string extension = Path.GetExtension((string) path);
-						if (extension != null) valid = extension.ToLower() == ".txt";
+						if (extension != null) valid = extension.ToLower() == ".LOLTXT";
 					}
 
 					if(valid)
@@ -84,6 +84,12 @@ namespace LoL_Texter
 		private void TSmi_Restore_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void BTN_Save_Click(object sender, EventArgs e)
+		{
+			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
+			fh.SaveLines(RT_EditArea.Lines);
 		}
 	}
 }
