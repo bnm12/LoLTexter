@@ -34,16 +34,17 @@
 			this.TSmi_exit = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
 			this.TSi_Options = new System.Windows.Forms.ToolStripDropDownButton();
+			this.TSmi_Restore = new System.Windows.Forms.ToolStripMenuItem();
 			this.SS_Main = new System.Windows.Forms.StatusStrip();
 			this.SS_Progress = new System.Windows.Forms.ToolStripProgressBar();
 			this.SS_Status = new System.Windows.Forms.ToolStripStatusLabel();
 			this.Container = new System.Windows.Forms.SplitContainer();
-			this.LV_Files = new System.Windows.Forms.ListView();
-			this.RT_EditArea = new System.Windows.Forms.RichTextBox();
-			this.GB_EditorHeader = new System.Windows.Forms.GroupBox();
 			this.GB_FileHeader = new System.Windows.Forms.GroupBox();
+			this.LV_Files = new System.Windows.Forms.ListView();
+			this.GB_EditorHeader = new System.Windows.Forms.GroupBox();
 			this.BTN_LoadCurrent = new System.Windows.Forms.Button();
-			this.TSmi_Restore = new System.Windows.Forms.ToolStripMenuItem();
+			this.RT_EditArea = new System.Windows.Forms.RichTextBox();
+			this.BTN_Save = new System.Windows.Forms.Button();
 			this.TS_Main.SuspendLayout();
 			this.SS_Main.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
@@ -100,6 +101,13 @@
 			this.TSi_Options.Text = "Options";
 			this.TSi_Options.ToolTipText = "Options";
 			// 
+			// TSmi_Restore
+			// 
+			this.TSmi_Restore.Name = "TSmi_Restore";
+			this.TSmi_Restore.Size = new System.Drawing.Size(155, 22);
+			this.TSmi_Restore.Text = "Restore Backup";
+			this.TSmi_Restore.Click += new System.EventHandler(this.TSmi_Restore_Click);
+			// 
 			// SS_Main
 			// 
 			this.SS_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -131,52 +139,16 @@
 			// 
 			// Container.Panel1
 			// 
-			this.Container.Panel1.Controls.Add(this.GB_FileHeader);
 			this.Container.Panel1.Controls.Add(this.LV_Files);
+			this.Container.Panel1.Controls.Add(this.GB_FileHeader);
 			// 
 			// Container.Panel2
 			// 
-			this.Container.Panel2.Controls.Add(this.GB_EditorHeader);
 			this.Container.Panel2.Controls.Add(this.RT_EditArea);
+			this.Container.Panel2.Controls.Add(this.GB_EditorHeader);
 			this.Container.Size = new System.Drawing.Size(868, 393);
 			this.Container.SplitterDistance = 289;
 			this.Container.TabIndex = 2;
-			// 
-			// LV_Files
-			// 
-			this.LV_Files.AllowDrop = true;
-			this.LV_Files.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LV_Files.FullRowSelect = true;
-			this.LV_Files.Location = new System.Drawing.Point(0, 0);
-			this.LV_Files.MultiSelect = false;
-			this.LV_Files.Name = "LV_Files";
-			this.LV_Files.Size = new System.Drawing.Size(289, 393);
-			this.LV_Files.Sorting = System.Windows.Forms.SortOrder.Ascending;
-			this.LV_Files.TabIndex = 0;
-			this.LV_Files.UseCompatibleStateImageBehavior = false;
-			this.LV_Files.View = System.Windows.Forms.View.Details;
-			this.LV_Files.DragDrop += new System.Windows.Forms.DragEventHandler(this.LV_Files_DragDrop);
-			this.LV_Files.DragEnter += new System.Windows.Forms.DragEventHandler(this.LV_Files_DragEnter);
-			// 
-			// RT_EditArea
-			// 
-			this.RT_EditArea.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.RT_EditArea.Location = new System.Drawing.Point(0, 0);
-			this.RT_EditArea.Name = "RT_EditArea";
-			this.RT_EditArea.Size = new System.Drawing.Size(575, 393);
-			this.RT_EditArea.TabIndex = 0;
-			this.RT_EditArea.Text = "";
-			this.RT_EditArea.WordWrap = false;
-			// 
-			// GB_EditorHeader
-			// 
-			this.GB_EditorHeader.Controls.Add(this.BTN_LoadCurrent);
-			this.GB_EditorHeader.Dock = System.Windows.Forms.DockStyle.Top;
-			this.GB_EditorHeader.Location = new System.Drawing.Point(0, 0);
-			this.GB_EditorHeader.Name = "GB_EditorHeader";
-			this.GB_EditorHeader.Size = new System.Drawing.Size(575, 48);
-			this.GB_EditorHeader.TabIndex = 1;
-			this.GB_EditorHeader.TabStop = false;
 			// 
 			// GB_FileHeader
 			// 
@@ -186,6 +158,33 @@
 			this.GB_FileHeader.Size = new System.Drawing.Size(289, 48);
 			this.GB_FileHeader.TabIndex = 2;
 			this.GB_FileHeader.TabStop = false;
+			// 
+			// LV_Files
+			// 
+			this.LV_Files.AllowDrop = true;
+			this.LV_Files.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.LV_Files.FullRowSelect = true;
+			this.LV_Files.Location = new System.Drawing.Point(0, 48);
+			this.LV_Files.MultiSelect = false;
+			this.LV_Files.Name = "LV_Files";
+			this.LV_Files.Size = new System.Drawing.Size(289, 345);
+			this.LV_Files.Sorting = System.Windows.Forms.SortOrder.Ascending;
+			this.LV_Files.TabIndex = 0;
+			this.LV_Files.UseCompatibleStateImageBehavior = false;
+			this.LV_Files.View = System.Windows.Forms.View.Details;
+			this.LV_Files.DragDrop += new System.Windows.Forms.DragEventHandler(this.LV_Files_DragDrop);
+			this.LV_Files.DragEnter += new System.Windows.Forms.DragEventHandler(this.LV_Files_DragEnter);
+			// 
+			// GB_EditorHeader
+			// 
+			this.GB_EditorHeader.Controls.Add(this.BTN_Save);
+			this.GB_EditorHeader.Controls.Add(this.BTN_LoadCurrent);
+			this.GB_EditorHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.GB_EditorHeader.Location = new System.Drawing.Point(0, 0);
+			this.GB_EditorHeader.Name = "GB_EditorHeader";
+			this.GB_EditorHeader.Size = new System.Drawing.Size(575, 48);
+			this.GB_EditorHeader.TabIndex = 0;
+			this.GB_EditorHeader.TabStop = false;
 			// 
 			// BTN_LoadCurrent
 			// 
@@ -197,12 +196,26 @@
 			this.BTN_LoadCurrent.UseVisualStyleBackColor = true;
 			this.BTN_LoadCurrent.Click += new System.EventHandler(this.BTN_LoadCurrent_Click);
 			// 
-			// TSmi_Restore
+			// RT_EditArea
 			// 
-			this.TSmi_Restore.Name = "TSmi_Restore";
-			this.TSmi_Restore.Size = new System.Drawing.Size(155, 22);
-			this.TSmi_Restore.Text = "Restore Backup";
-			this.TSmi_Restore.Click += new System.EventHandler(this.TSmi_Restore_Click);
+			this.RT_EditArea.AcceptsTab = true;
+			this.RT_EditArea.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.RT_EditArea.Location = new System.Drawing.Point(0, 48);
+			this.RT_EditArea.Name = "RT_EditArea";
+			this.RT_EditArea.Size = new System.Drawing.Size(575, 345);
+			this.RT_EditArea.TabIndex = 1;
+			this.RT_EditArea.Text = "";
+			this.RT_EditArea.WordWrap = false;
+			// 
+			// BTN_Save
+			// 
+			this.BTN_Save.Location = new System.Drawing.Point(89, 19);
+			this.BTN_Save.Name = "BTN_Save";
+			this.BTN_Save.Size = new System.Drawing.Size(77, 23);
+			this.BTN_Save.TabIndex = 1;
+			this.BTN_Save.Text = "Save Current";
+			this.BTN_Save.UseVisualStyleBackColor = true;
+			this.BTN_Save.Click += new System.EventHandler(this.BTN_Save_Click);
 			// 
 			// Form1
 			// 
@@ -238,13 +251,14 @@
 		private System.Windows.Forms.ToolStripDropDownButton TSi_Options;
 		private System.Windows.Forms.ToolStripProgressBar SS_Progress;
 		private System.Windows.Forms.ToolStripStatusLabel SS_Status;
-		private System.Windows.Forms.SplitContainer Container;
+		private new System.Windows.Forms.SplitContainer Container;
 		private System.Windows.Forms.ListView LV_Files;
 		private System.Windows.Forms.RichTextBox RT_EditArea;
 		private System.Windows.Forms.GroupBox GB_FileHeader;
 		private System.Windows.Forms.GroupBox GB_EditorHeader;
 		private System.Windows.Forms.Button BTN_LoadCurrent;
 		private System.Windows.Forms.ToolStripMenuItem TSmi_Restore;
+		private System.Windows.Forms.Button BTN_Save;
 	}
 }
 
