@@ -10,6 +10,7 @@ namespace LoL_Texter
 		public static string RADSPath;
 		public static string Locale;
 		public static string ProjectFolder;
+		public static string FontConfigFolder;
 		public static string FullPath;
 
 		static PathFinder()
@@ -30,7 +31,10 @@ namespace LoL_Texter
 			string pathToLatest = RADSPath + @"\projects\" + ProjectFolder;
 			string[] dirs = Directory.GetDirectories(pathToLatest + @"\managedfiles");
 			string latestVersion = dirs[dirs.Length - 1];
-			FullPath = latestVersion + @"\Data\Menu";
+			FontConfigFolder = latestVersion + @"\Data\Menu";
+
+			string file = Directory.GetFiles(FontConfigFolder)[0];
+			FullPath = FontConfigFolder + @"\" + file;
 		}
 	}
 }
