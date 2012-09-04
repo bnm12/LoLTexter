@@ -19,7 +19,6 @@ namespace LoL_Texter
 		public Form1()
 		{
 			InitializeComponent();
-			Debug.Print(PathFinder.FullPath);
 		}
 
 		private void TSmi_exit_Click(object sender, EventArgs e)
@@ -44,7 +43,7 @@ namespace LoL_Texter
 					foreach (var path in data)
 					{
 						string extension = Path.GetExtension((string) path);
-						if (extension != null) valid = extension.ToLower() == ".LOLTXT";
+						if (extension != null) valid = extension.ToLower() == ".LTX".ToLower();
 					}
 
 					if(valid)
@@ -83,7 +82,8 @@ namespace LoL_Texter
 
 		private void TSmi_Restore_Click(object sender, EventArgs e)
 		{
-
+			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
+			fh.Restore();
 		}
 
 		private void BTN_Save_Click(object sender, EventArgs e)
