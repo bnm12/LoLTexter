@@ -9,6 +9,7 @@ namespace LoL_Texter.Classes
 {
 	class FileHandler
 	{
+		//Usefull paths
 		private string _defaultPath;
 		private string _defaultLocale;
 		private string _appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
