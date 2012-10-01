@@ -62,21 +62,26 @@ namespace LoL_Texter
 
 		private void LoadFile(object path)
 		{
-			SetEditorLines(File.ReadAllLines((string)path));
-
+			ConfigHandler configHandler = new ConfigHandler((string)path);
+			SetEditorLines(configHandler.Config);
 		}
 
-		private delegate void SetEditorLinesCallBack(string[] readAllLines);
-		private void SetEditorLines(string[] readAllLines)
+		private delegate void SetEditorLinesCallBack(Dictionary<string, string> allLines);
+		private void SetEditorLines(Dictionary<string, string> allLines)
 		{
-			if (this.RT_EditArea.InvokeRequired)
+			if (this.LW_Config.InvokeRequired)
 			{
 				SetEditorLinesCallBack d = new SetEditorLinesCallBack(SetEditorLines);
-				this.Invoke(d, new object[] { readAllLines });
+				this.Invoke(d, new object[] { allLines });
 			}
 			else
 			{
-				this.RT_EditArea.Lines = readAllLines;
+				foreach (KeyValuePair<string, string> keyValuePair in allLines)
+				{
+					ListViewItem LI = new ListViewItem(keyValuePair.Key);
+					LI.SubItems.Add(keyValuePair.Value);
+					this.LW_Config.Items.Add(LI);
+				}
 			}
 		}
 
@@ -88,8 +93,8 @@ namespace LoL_Texter
 
 		private void BTN_Save_Click(object sender, EventArgs e)
 		{
-			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
-			fh.SaveLines(RT_EditArea.Lines);
+//			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
+//			fh.SaveLines(RT_EditArea.Lines);
 		}
 	}
 }

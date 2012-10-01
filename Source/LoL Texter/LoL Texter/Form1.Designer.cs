@@ -39,12 +39,14 @@
 			this.SS_Progress = new System.Windows.Forms.ToolStripProgressBar();
 			this.SS_Status = new System.Windows.Forms.ToolStripStatusLabel();
 			this.Container = new System.Windows.Forms.SplitContainer();
-			this.GB_FileHeader = new System.Windows.Forms.GroupBox();
 			this.LV_Files = new System.Windows.Forms.ListView();
+			this.GB_FileHeader = new System.Windows.Forms.GroupBox();
 			this.GB_EditorHeader = new System.Windows.Forms.GroupBox();
-			this.BTN_LoadCurrent = new System.Windows.Forms.Button();
-			this.RT_EditArea = new System.Windows.Forms.RichTextBox();
 			this.BTN_Save = new System.Windows.Forms.Button();
+			this.BTN_LoadCurrent = new System.Windows.Forms.Button();
+			this.LW_Config = new System.Windows.Forms.ListView();
+			this.CH_Key = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.CH_Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.TS_Main.SuspendLayout();
 			this.SS_Main.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
@@ -80,7 +82,7 @@
 			// TSmi_exit
 			// 
 			this.TSmi_exit.Name = "TSmi_exit";
-			this.TSmi_exit.Size = new System.Drawing.Size(152, 22);
+			this.TSmi_exit.Size = new System.Drawing.Size(93, 22);
 			this.TSmi_exit.Text = "Exit";
 			this.TSmi_exit.Click += new System.EventHandler(this.TSmi_exit_Click);
 			// 
@@ -144,20 +146,11 @@
 			// 
 			// Container.Panel2
 			// 
-			this.Container.Panel2.Controls.Add(this.RT_EditArea);
+			this.Container.Panel2.Controls.Add(this.LW_Config);
 			this.Container.Panel2.Controls.Add(this.GB_EditorHeader);
 			this.Container.Size = new System.Drawing.Size(868, 393);
 			this.Container.SplitterDistance = 289;
 			this.Container.TabIndex = 2;
-			// 
-			// GB_FileHeader
-			// 
-			this.GB_FileHeader.Dock = System.Windows.Forms.DockStyle.Top;
-			this.GB_FileHeader.Location = new System.Drawing.Point(0, 0);
-			this.GB_FileHeader.Name = "GB_FileHeader";
-			this.GB_FileHeader.Size = new System.Drawing.Size(289, 48);
-			this.GB_FileHeader.TabIndex = 2;
-			this.GB_FileHeader.TabStop = false;
 			// 
 			// LV_Files
 			// 
@@ -175,6 +168,15 @@
 			this.LV_Files.DragDrop += new System.Windows.Forms.DragEventHandler(this.LV_Files_DragDrop);
 			this.LV_Files.DragEnter += new System.Windows.Forms.DragEventHandler(this.LV_Files_DragEnter);
 			// 
+			// GB_FileHeader
+			// 
+			this.GB_FileHeader.Dock = System.Windows.Forms.DockStyle.Top;
+			this.GB_FileHeader.Location = new System.Drawing.Point(0, 0);
+			this.GB_FileHeader.Name = "GB_FileHeader";
+			this.GB_FileHeader.Size = new System.Drawing.Size(289, 48);
+			this.GB_FileHeader.TabIndex = 2;
+			this.GB_FileHeader.TabStop = false;
+			// 
 			// GB_EditorHeader
 			// 
 			this.GB_EditorHeader.Controls.Add(this.BTN_Save);
@@ -186,6 +188,16 @@
 			this.GB_EditorHeader.TabIndex = 0;
 			this.GB_EditorHeader.TabStop = false;
 			// 
+			// BTN_Save
+			// 
+			this.BTN_Save.Location = new System.Drawing.Point(89, 19);
+			this.BTN_Save.Name = "BTN_Save";
+			this.BTN_Save.Size = new System.Drawing.Size(77, 23);
+			this.BTN_Save.TabIndex = 1;
+			this.BTN_Save.Text = "Save Current";
+			this.BTN_Save.UseVisualStyleBackColor = true;
+			this.BTN_Save.Click += new System.EventHandler(this.BTN_Save_Click);
+			// 
 			// BTN_LoadCurrent
 			// 
 			this.BTN_LoadCurrent.Location = new System.Drawing.Point(6, 19);
@@ -196,26 +208,33 @@
 			this.BTN_LoadCurrent.UseVisualStyleBackColor = true;
 			this.BTN_LoadCurrent.Click += new System.EventHandler(this.BTN_LoadCurrent_Click);
 			// 
-			// RT_EditArea
+			// LW_Config
 			// 
-			this.RT_EditArea.AcceptsTab = true;
-			this.RT_EditArea.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.RT_EditArea.Location = new System.Drawing.Point(0, 48);
-			this.RT_EditArea.Name = "RT_EditArea";
-			this.RT_EditArea.Size = new System.Drawing.Size(575, 345);
-			this.RT_EditArea.TabIndex = 1;
-			this.RT_EditArea.Text = "";
-			this.RT_EditArea.WordWrap = false;
+			this.LW_Config.AutoArrange = false;
+			this.LW_Config.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CH_Key,
+            this.CH_Value});
+			this.LW_Config.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.LW_Config.FullRowSelect = true;
+			this.LW_Config.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+			this.LW_Config.LabelEdit = true;
+			this.LW_Config.Location = new System.Drawing.Point(0, 48);
+			this.LW_Config.MultiSelect = false;
+			this.LW_Config.Name = "LW_Config";
+			this.LW_Config.Size = new System.Drawing.Size(575, 345);
+			this.LW_Config.TabIndex = 1;
+			this.LW_Config.UseCompatibleStateImageBehavior = false;
+			this.LW_Config.View = System.Windows.Forms.View.Details;
 			// 
-			// BTN_Save
+			// CH_Key
 			// 
-			this.BTN_Save.Location = new System.Drawing.Point(89, 19);
-			this.BTN_Save.Name = "BTN_Save";
-			this.BTN_Save.Size = new System.Drawing.Size(77, 23);
-			this.BTN_Save.TabIndex = 1;
-			this.BTN_Save.Text = "Save Current";
-			this.BTN_Save.UseVisualStyleBackColor = true;
-			this.BTN_Save.Click += new System.EventHandler(this.BTN_Save_Click);
+			this.CH_Key.Text = "Key";
+			this.CH_Key.Width = 292;
+			// 
+			// CH_Value
+			// 
+			this.CH_Value.Text = "Value";
+			this.CH_Value.Width = 279;
 			// 
 			// Form1
 			// 
@@ -253,12 +272,14 @@
 		private System.Windows.Forms.ToolStripStatusLabel SS_Status;
 		private new System.Windows.Forms.SplitContainer Container;
 		private System.Windows.Forms.ListView LV_Files;
-		private System.Windows.Forms.RichTextBox RT_EditArea;
 		private System.Windows.Forms.GroupBox GB_FileHeader;
 		private System.Windows.Forms.GroupBox GB_EditorHeader;
 		private System.Windows.Forms.Button BTN_LoadCurrent;
 		private System.Windows.Forms.ToolStripMenuItem TSmi_Restore;
 		private System.Windows.Forms.Button BTN_Save;
+		private System.Windows.Forms.ListView LW_Config;
+		private System.Windows.Forms.ColumnHeader CH_Key;
+		private System.Windows.Forms.ColumnHeader CH_Value;
 	}
 }
 
