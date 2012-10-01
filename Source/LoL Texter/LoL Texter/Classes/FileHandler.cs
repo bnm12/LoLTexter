@@ -41,6 +41,8 @@ namespace LoL_Texter.Classes
 				string locale = filename.Replace("fontconfig_", "");
 				return DoBackup(fullPath.Replace(filename, ""), locale.Replace(".txt", ""));
 			}
+
+			return false;
 		}
 
 		public bool DoBackup(string rootPath, string locale)
