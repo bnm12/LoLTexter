@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 using Microsoft.Win32;
 
 namespace LoL_Texter.Classes
@@ -19,6 +20,24 @@ namespace LoL_Texter.Classes
 			var openSubKey = Registry.CurrentUser.OpenSubKey(@"Software\Riot Games\RADS");
 			if (openSubKey != null)
 				RADSPath = openSubKey.GetValue("LocalRootFolder").ToString();
+			else
+			{
+				FolderBrowserDialog picker = new FolderBrowserDialog();
+				picker.Description = "Locate your \"League of Legends\" folder (the one with the .exe files)";
+				picker.RootFolder = Environment.SpecialFolder.MyComputer;
+				picker.ShowNewFolderButton = false;
+				DialogResult result = picker.ShowDialog();
+
+				if(result == DialogResult.OK)
+				{
+					RADSPath = Path.Combine(picker.SelectedPath, "RADS");
+				}
+				else
+				{
+					MessageBox.Show("Exitting");
+					Application.Exit();
+				}
+			}
 
 			// Parse Config file to get the locale
 			string[] lines = File.ReadAllLines(RADSPath + @"\system\locale.cfg");
