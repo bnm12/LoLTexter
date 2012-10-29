@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,19 +10,22 @@ namespace LoL_Texter.Classes
 {
 	class ConfigHandler
 	{
-		public Dictionary<string, string> Config = new Dictionary<string, string>();
+		public DataTable Config = new DataTable("Config");
+		public string Name;
 		private List<string> _headder = new List<string>();
 		private string _configFilePath;
 
 		public ConfigHandler(string configFilePath)
 		{
 			_configFilePath = configFilePath;
-			Config = readConfig(_configFilePath);
+			Config = ReadConfig(_configFilePath);
 		}
 
-		private Dictionary<string, string> readConfig(string path)
+		private DataTable ReadConfig(string path)
 		{
-			Dictionary<string, string> returnLines = new Dictionary<string, string>();
+			DataTable returnData = new DataTable("Config");
+			returnData.Columns.Add("Item", typeof (string));
+			returnData.Columns.Add("Property", typeof (string));
 			FileStream fs = new FileStream(path, FileMode.Open);
 			StreamReader reader = new StreamReader(fs);
 
@@ -39,14 +43,18 @@ namespace LoL_Texter.Classes
 					int fourthindex = line.IndexOf('"', thirdIndex + 1);
 					string value = line.Substring(thirdIndex + 1, fourthindex - (thirdIndex + 1));
 
-					returnLines.Add(key, value);
+					returnData.Rows.Add(key, value);
+				}
+				else if(line.StartsWith("#!"))
+				{
+					Name = line.Substring(2);
 				}
 				else
 				{
 					_headder.Add(line);
 				}
 			}
-			return returnLines;
+			return returnData;
 		}
 
 		public List<string> AssembleConfig()
@@ -54,9 +62,9 @@ namespace LoL_Texter.Classes
 			List<string> returnList = new List<string>();
 			returnList.AddRange(_headder);
 
-			foreach (KeyValuePair<string, string> keyValuePair in Config)
+			foreach (DataRow row in Config.Rows)
 			{
-				returnList.Add("tr \"" + keyValuePair.Key + "\" = \"" + keyValuePair.Value + "\"");
+				returnList.Add("tr \"" + row[0] + "\" = \"" + row[1] + "\"");
 			}
 
 			return returnList;

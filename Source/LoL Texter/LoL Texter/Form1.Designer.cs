@@ -44,9 +44,7 @@
 			this.GB_EditorHeader = new System.Windows.Forms.GroupBox();
 			this.BTN_Save = new System.Windows.Forms.Button();
 			this.BTN_LoadCurrent = new System.Windows.Forms.Button();
-			this.LW_Config = new System.Windows.Forms.ListView();
-			this.CH_Key = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.CH_Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.dataView = new System.Windows.Forms.DataGridView();
 			this.TS_Main.SuspendLayout();
 			this.SS_Main.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
@@ -54,6 +52,7 @@
 			this.Container.Panel2.SuspendLayout();
 			this.Container.SuspendLayout();
 			this.GB_EditorHeader.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// TS_Main
@@ -146,7 +145,7 @@
 			// 
 			// Container.Panel2
 			// 
-			this.Container.Panel2.Controls.Add(this.LW_Config);
+			this.Container.Panel2.Controls.Add(this.dataView);
 			this.Container.Panel2.Controls.Add(this.GB_EditorHeader);
 			this.Container.Size = new System.Drawing.Size(868, 393);
 			this.Container.SplitterDistance = 289;
@@ -208,33 +207,17 @@
 			this.BTN_LoadCurrent.UseVisualStyleBackColor = true;
 			this.BTN_LoadCurrent.Click += new System.EventHandler(this.BTN_LoadCurrent_Click);
 			// 
-			// LW_Config
+			// dataView
 			// 
-			this.LW_Config.AutoArrange = false;
-			this.LW_Config.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.CH_Key,
-            this.CH_Value});
-			this.LW_Config.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.LW_Config.FullRowSelect = true;
-			this.LW_Config.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-			this.LW_Config.LabelEdit = true;
-			this.LW_Config.Location = new System.Drawing.Point(0, 48);
-			this.LW_Config.MultiSelect = false;
-			this.LW_Config.Name = "LW_Config";
-			this.LW_Config.Size = new System.Drawing.Size(575, 345);
-			this.LW_Config.TabIndex = 1;
-			this.LW_Config.UseCompatibleStateImageBehavior = false;
-			this.LW_Config.View = System.Windows.Forms.View.Details;
-			// 
-			// CH_Key
-			// 
-			this.CH_Key.Text = "Key";
-			this.CH_Key.Width = 292;
-			// 
-			// CH_Value
-			// 
-			this.CH_Value.Text = "Value";
-			this.CH_Value.Width = 279;
+			this.dataView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+			this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataView.Location = new System.Drawing.Point(0, 48);
+			this.dataView.Name = "dataView";
+			this.dataView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dataView.ShowEditingIcon = false;
+			this.dataView.Size = new System.Drawing.Size(575, 345);
+			this.dataView.TabIndex = 2;
 			// 
 			// Form1
 			// 
@@ -255,6 +238,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.Container)).EndInit();
 			this.Container.ResumeLayout(false);
 			this.GB_EditorHeader.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.dataView)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -277,9 +261,7 @@
 		private System.Windows.Forms.Button BTN_LoadCurrent;
 		private System.Windows.Forms.ToolStripMenuItem TSmi_Restore;
 		private System.Windows.Forms.Button BTN_Save;
-		private System.Windows.Forms.ListView LW_Config;
-		private System.Windows.Forms.ColumnHeader CH_Key;
-		private System.Windows.Forms.ColumnHeader CH_Value;
+		private System.Windows.Forms.DataGridView dataView;
 	}
 }
 

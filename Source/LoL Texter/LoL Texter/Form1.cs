@@ -16,6 +16,7 @@ namespace LoL_Texter
 {
 	public partial class Form1 : Form
 	{
+		private ConfigHandler configHandler;
 		public Form1()
 		{
 			InitializeComponent();
@@ -57,31 +58,28 @@ namespace LoL_Texter
 		private void BTN_LoadCurrent_Click(object sender, EventArgs e)
 		{
 			Thread Loader = new Thread(new ParameterizedThreadStart(LoadFile));
+			Loader.Name = "File Loader";
 			Loader.Start(PathFinder.FullPath);
 		}
 
 		private void LoadFile(object path)
 		{
-			ConfigHandler configHandler = new ConfigHandler((string)path);
+			configHandler = new ConfigHandler((string)path);
+			Debug.Print(configHandler.Name);
 			SetEditorLines(configHandler.Config);
 		}
 
-		private delegate void SetEditorLinesCallBack(Dictionary<string, string> allLines);
-		private void SetEditorLines(Dictionary<string, string> allLines)
+		private delegate void SetEditorLinesCallBack(DataTable data);
+		private void SetEditorLines(DataTable data)
 		{
-			if (this.LW_Config.InvokeRequired)
+			if (this.dataView.InvokeRequired)
 			{
 				SetEditorLinesCallBack d = new SetEditorLinesCallBack(SetEditorLines);
-				this.Invoke(d, new object[] { allLines });
+				this.Invoke(d, new object[] { data });
 			}
 			else
 			{
-				foreach (KeyValuePair<string, string> keyValuePair in allLines)
-				{
-					ListViewItem LI = new ListViewItem(keyValuePair.Key);
-					LI.SubItems.Add(keyValuePair.Value);
-					this.LW_Config.Items.Add(LI);
-				}
+				dataView.DataSource = data;
 			}
 		}
 
@@ -92,9 +90,9 @@ namespace LoL_Texter
 		}
 
 		private void BTN_Save_Click(object sender, EventArgs e)
-		{
-//			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
-//			fh.SaveLines(RT_EditArea.Lines);
+		{		
+			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
+			fh.SaveLines(configHandler.AssembleConfig().ToArray());
 		}
 	}
 }
