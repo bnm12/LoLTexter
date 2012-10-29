@@ -34,8 +34,8 @@ namespace LoL_Texter.Classes
 			string latestVersion = dirs[dirs.Length - 1];
 			FontConfigFolder = latestVersion + @"\Data\Menu";
 
-			string file = Directory.GetFiles(FontConfigFolder)[0];
-			FullPath = file;
+			string file = "fontconfig_" + Locale + ".txt";
+			FullPath = Path.Combine(FontConfigFolder, file);
 		}
 	}
 }

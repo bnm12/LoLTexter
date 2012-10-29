@@ -92,7 +92,14 @@ namespace LoL_Texter
 		private void BTN_Save_Click(object sender, EventArgs e)
 		{		
 			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
-			fh.SaveLines(configHandler.AssembleConfig().ToArray());
+			if(fh.SaveLines(configHandler.AssembleConfig().ToArray()))
+			{
+				MessageBox.Show("Saved!");
+			}
+			else
+			{
+				MessageBox.Show("Save Failed!");
+			}
 		}
 	}
 }

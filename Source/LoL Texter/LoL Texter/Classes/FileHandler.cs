@@ -49,7 +49,7 @@ namespace LoL_Texter.Classes
 		{
 
 			File.Copy(Path.Combine(rootPath, "fontconfig_" + locale + ".txt"), Path.Combine(rootPath, "backup.LTX"));
-			if(File.Exists(Path.Combine(_defaultPath, "backup.loltxt")))
+			if(File.Exists(Path.Combine(_defaultPath, "backup.LTX")))
 			{
 				return true;
 			}
@@ -70,13 +70,15 @@ namespace LoL_Texter.Classes
 
 		public bool SaveLines(string[] lines, string locale)
 		{
-			if (!File.Exists(Path.Combine(_defaultPath, "backup.loltxt")))
+			if (!File.Exists(Path.Combine(_defaultPath, "backup.LTX")))
 			{
 				DoBackup();
 			}
-
+			
 			File.WriteAllLines(Path.Combine(_defaultPath, "fontconfig_" + locale + ".txt"), lines);
-			return File.ReadAllLines(Path.Combine(_defaultPath, "fontconfig_" + locale + ".txt")).Equals(lines);
+
+			return File.ReadAllLines(Path.Combine(_defaultPath, "fontconfig_" + locale + ".txt")).SequenceEqual(lines);
+			//return File.ReadAllLines(Path.Combine(_defaultPath, "fontconfig_" + locale + ".txt")).Equals(lines);
 		}
 
 		public bool Restore()
@@ -95,8 +97,8 @@ namespace LoL_Texter.Classes
 
 		public bool Restore(string path, string locale)
 		{
-			File.Copy(Path.Combine(path, "backup.loltxt"), Path.Combine(path, "fontconfig_" + locale + ".txt"), true);
-			return File.ReadAllLines(Path.Combine(path, "fontconfig_" + locale + ".txt")).Equals(File.ReadAllLines(Path.Combine(path, "backup.loltxt")));
+			File.Copy(Path.Combine(path, "backup.LTX"), Path.Combine(path, "fontconfig_" + locale + ".txt"), true);
+			return File.ReadAllLines(Path.Combine(path, "fontconfig_" + locale + ".txt")).Equals(File.ReadAllLines(Path.Combine(path, "backup.LTX")));
 		}
 	}
 }
