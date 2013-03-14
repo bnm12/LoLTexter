@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
@@ -49,8 +51,10 @@ namespace LoL_Texter.Classes
 
 			// Build the string to the latest release folder
 			string pathToLatest = RADSPath + @"\projects\" + ProjectFolder;
-			string[] dirs = Directory.GetDirectories(pathToLatest + @"\managedfiles");
-			string latestVersion = dirs[dirs.Length - 1];
+
+            var dirs = Directory.GetDirectories(pathToLatest + @"\managedfiles").OrderBy(d => new FileInfo(d).CreationTime).ToList();
+
+            string latestVersion = dirs[dirs.Count - 1];
 			FontConfigFolder = latestVersion + @"\Data\Menu";
 
 			string file = "fontconfig_" + Locale + ".txt";
