@@ -41,18 +41,22 @@
 			this.Container = new System.Windows.Forms.SplitContainer();
 			this.LV_Files = new System.Windows.Forms.ListView();
 			this.GB_FileHeader = new System.Windows.Forms.GroupBox();
+			this.dataView = new System.Windows.Forms.DataGridView();
 			this.GB_EditorHeader = new System.Windows.Forms.GroupBox();
 			this.BTN_Save = new System.Windows.Forms.Button();
 			this.BTN_LoadCurrent = new System.Windows.Forms.Button();
-			this.dataView = new System.Windows.Forms.DataGridView();
+			this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadCurrentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.TS_Main.SuspendLayout();
 			this.SS_Main.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.Container)).BeginInit();
 			this.Container.Panel1.SuspendLayout();
 			this.Container.Panel2.SuspendLayout();
 			this.Container.SuspendLayout();
-			this.GB_EditorHeader.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataView)).BeginInit();
+			this.GB_EditorHeader.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// TS_Main
@@ -71,6 +75,10 @@
 			// 
 			this.TSi_File.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
 			this.TSi_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadCurrentToolStripMenuItem,
+            this.loadToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem,
             this.TSmi_exit});
 			this.TSi_File.Image = ((System.Drawing.Image)(resources.GetObject("TSi_File.Image")));
 			this.TSi_File.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -81,7 +89,7 @@
 			// TSmi_exit
 			// 
 			this.TSmi_exit.Name = "TSmi_exit";
-			this.TSmi_exit.Size = new System.Drawing.Size(93, 22);
+			this.TSmi_exit.Size = new System.Drawing.Size(152, 22);
 			this.TSmi_exit.Text = "Exit";
 			this.TSmi_exit.Click += new System.EventHandler(this.TSmi_exit_Click);
 			// 
@@ -176,6 +184,18 @@
 			this.GB_FileHeader.TabIndex = 2;
 			this.GB_FileHeader.TabStop = false;
 			// 
+			// dataView
+			// 
+			this.dataView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+			this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataView.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataView.Location = new System.Drawing.Point(0, 48);
+			this.dataView.Name = "dataView";
+			this.dataView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dataView.ShowEditingIcon = false;
+			this.dataView.Size = new System.Drawing.Size(575, 345);
+			this.dataView.TabIndex = 2;
+			// 
 			// GB_EditorHeader
 			// 
 			this.GB_EditorHeader.Controls.Add(this.BTN_Save);
@@ -207,17 +227,32 @@
 			this.BTN_LoadCurrent.UseVisualStyleBackColor = true;
 			this.BTN_LoadCurrent.Click += new System.EventHandler(this.BTN_LoadCurrent_Click);
 			// 
-			// dataView
+			// saveToolStripMenuItem
 			// 
-			this.dataView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-			this.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataView.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataView.Location = new System.Drawing.Point(0, 48);
-			this.dataView.Name = "dataView";
-			this.dataView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataView.ShowEditingIcon = false;
-			this.dataView.Size = new System.Drawing.Size(575, 345);
-			this.dataView.TabIndex = 2;
+			this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+			this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveToolStripMenuItem.Text = "Save";
+			this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+			// 
+			// saveAsToolStripMenuItem
+			// 
+			this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+			this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.saveAsToolStripMenuItem.Text = "Save As...";
+			this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+			// 
+			// loadToolStripMenuItem
+			// 
+			this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+			this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.loadToolStripMenuItem.Text = "Load";
+			// 
+			// loadCurrentToolStripMenuItem
+			// 
+			this.loadCurrentToolStripMenuItem.Name = "loadCurrentToolStripMenuItem";
+			this.loadCurrentToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.loadCurrentToolStripMenuItem.Text = "Load Current";
+			this.loadCurrentToolStripMenuItem.Click += new System.EventHandler(this.loadCurrentToolStripMenuItem_Click);
 			// 
 			// Form1
 			// 
@@ -237,8 +272,8 @@
 			this.Container.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.Container)).EndInit();
 			this.Container.ResumeLayout(false);
-			this.GB_EditorHeader.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataView)).EndInit();
+			this.GB_EditorHeader.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -262,6 +297,10 @@
 		private System.Windows.Forms.ToolStripMenuItem TSmi_Restore;
 		private System.Windows.Forms.Button BTN_Save;
 		private System.Windows.Forms.DataGridView dataView;
+		private System.Windows.Forms.ToolStripMenuItem loadCurrentToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
 	}
 }
 

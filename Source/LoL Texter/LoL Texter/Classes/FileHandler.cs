@@ -80,6 +80,13 @@ namespace LoL_Texter.Classes
 			return File.ReadAllLines(Path.Combine(_defaultPath, "fontconfig_" + locale + ".txt")).SequenceEqual(lines);
 		}
 
+		public bool SaveAsLines(string[] lines, string path, string fName)
+		{
+			File.WriteAllLines(Path.Combine(path, fName), lines);
+
+			return File.ReadAllLines(Path.Combine(path, fName + ".LTX")).SequenceEqual(lines);
+		}
+
 		public bool Restore()
 		{
 			if (_defaultLocale != null)

@@ -101,5 +101,44 @@ namespace LoL_Texter
 				MessageBox.Show("Save Failed!");
 			}
 		}
+
+		private void loadCurrentToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Thread Loader = new Thread(new ParameterizedThreadStart(LoadFile));
+			Loader.Name = "File Loader";
+			Loader.Start(PathFinder.FullPath);
+		}
+
+		private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
+			if (fh.SaveLines(configHandler.AssembleConfig().ToArray()))
+			{
+				MessageBox.Show("Saved!");
+			}
+			else
+			{
+				MessageBox.Show("Save Failed!");
+			}
+		}
+
+		private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			FileHandler fh = new FileHandler(PathFinder.FontConfigFolder, PathFinder.Locale);
+			SaveFileDialog SF = new SaveFileDialog();
+			SF.AddExtension = true;
+			SF.AutoUpgradeEnabled = true;
+			SF.DefaultExt = ".LTX";
+			SF.Title = "Choose where to save your file";
+
+			DialogResult result = SF.ShowDialog();
+			if (result == DialogResult.OK || result == DialogResult.Yes)
+			{
+				Stream myStream = SF.OpenFile();
+				StreamWriter sw = new StreamWriter(myStream);
+				configHandler.AssembleConfig().ForEach(sw.WriteLine);
+				sw.Close();
+			}
+		}
 	}
 }
