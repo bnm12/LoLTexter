@@ -129,6 +129,7 @@ namespace LoL_Texter
 			SF.AddExtension = true;
 			SF.AutoUpgradeEnabled = true;
 			SF.DefaultExt = ".LTX";
+			SF.Filter = "Lol Texter Files (*.LTX)|*.LTX|All Files (*.*)|*.*";
 			SF.Title = "Choose where to save your file";
 
 			DialogResult result = SF.ShowDialog();
