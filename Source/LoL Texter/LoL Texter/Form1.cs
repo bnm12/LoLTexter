@@ -29,7 +29,14 @@ namespace LoL_Texter
 
 		private void LV_Files_DragDrop(object sender, DragEventArgs e)
 		{
-			MessageBox.Show("hmmm");
+			Thread Loader = new Thread(new ParameterizedThreadStart(LoadFile));
+			Loader.Name = "File Loader";
+			var paths = ((IDataObject)e.Data).GetData("FileName") as Array;
+
+			foreach (var path in paths)
+			{
+				Loader.Start(path);
+			}
 		}
 
 		private void LV_Files_DragEnter(object sender, DragEventArgs e)
@@ -139,6 +146,25 @@ namespace LoL_Texter
 				StreamWriter sw = new StreamWriter(myStream);
 				configHandler.AssembleConfig().ForEach(sw.WriteLine);
 				sw.Close();
+			}
+		}
+
+		private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog OF = new OpenFileDialog();
+			OF.AddExtension = true;
+			OF.CheckFileExists = true;
+			OF.CheckPathExists = true;
+			OF.DefaultExt = ".LTX";
+			OF.Filter = "Lol Texter Files (*.LTX)|*.LTX|All Files (*.*)|*.*";
+			OF.Title = "Choose the file to open";
+
+			DialogResult result = OF.ShowDialog();
+			if (result == DialogResult.OK || result == DialogResult.Yes)
+			{
+				Thread Loader = new Thread(new ParameterizedThreadStart(LoadFile));
+				Loader.Name = "File Loader";
+				Loader.Start(OF.FileName);
 			}
 		}
 	}
